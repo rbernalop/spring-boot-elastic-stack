@@ -94,5 +94,5 @@ target/
 !**/src/test/**/target/
 
 ### CUSTOM ###
-config/elasticsearch/
-config/logs/
+configuration/elasticsearch/
+configuration/logs/
