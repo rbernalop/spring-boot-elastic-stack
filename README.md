@@ -28,7 +28,8 @@ the [docker-compose.yml](docker-compose.yml) file.
 
 ## Kibana
 
-TODO 😃
+Kibana is used to visualize the logs. It's configured with Docker in the
+[docker-compose.yml](docker-compose.yml) file.
 
 ## Beats
 
