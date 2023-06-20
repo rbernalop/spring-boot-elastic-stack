@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+    elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:8.3.3
+        container_name: elasticsearch
+        ports: ['9200:9200']
+        environment:
+            - discovery.type=single-node
+            - xpack.security.enabled=false
+        volumes:
+            - './configuration/elasticsearch:/usr/share/elasticsearch/data'
+
+    logstash:
+        image: docker.elastic.co/logstash/logstash:8.3.3
+        container_name: logstash
+        volumes:
+            - ./configuration/logstash/pipeline:/usr/share/logstash/pipeline:ro
+        ports:
+            - "5000:5000/tcp"
+            - "9600:9600"
+        environment:
+            LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+        depends_on:
+            - elasticsearch
+
+    kibana:
+        image: docker.elastic.co/kibana/kibana:8.3.3
+        ports: [ '5601:5601' ]
+        depends_on:
+            - 'elasticsearch'
